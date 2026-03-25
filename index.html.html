@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfólio — [Seu Nome]</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F5F2;
+      --ink: #1A1814;
+      --muted: #8A8680;
+      --accent: #C8A96E;
+      --card: #EFECE8;
+      --border: #DDD9D3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(247,245,242,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown .8s ease both;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-size: .8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-text {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -54%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(10rem, 22vw, 22rem);
+      font-weight: 300;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,169,110,.18);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -.02em;
+    }
+    .hero-tag {
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      animation: fadeUp .9s .2s ease both;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      animation: fadeUp .9s .35s ease both;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      margin-top: 1.6rem;
+      max-width: 42ch;
+      color: var(--muted);
+      font-size: .95rem;
+      animation: fadeUp .9s .5s ease both;
+    }
+    .hero-cta {
+      margin-top: 2.8rem;
+      display: flex; align-items: center; gap: 2rem;
+      animation: fadeUp .9s .65s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--ink);
+      color: var(--bg);
+      text-decoration: none;
+      padding: .85rem 2rem;
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transition: background .25s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-ghost {
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 4rem; }
+    .section-header {
+      display: flex; align-items: center; gap: 1.4rem;
+      margin-bottom: 4rem;
+    }
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: -.01em;
+    }
+    .section-line {
+      flex: 1; height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SOBRE ── */
+    #sobre { background: var(--bg); }
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .sobre-img-wrap {
+      position: relative;
+    }
+    .sobre-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: .8rem;
+      color: var(--muted);
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+      overflow: hidden;
+      position: relative;
+    }
+    .sobre-img-placeholder:hover { background: var(--border); }
+    .sobre-img-placeholder svg { opacity: .35; }
+    .sobre-img-placeholder input[type=file] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .sobre-img-placeholder img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .sobre-accent-line {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      width: 60%; height: 60%;
+      border: 1px solid var(--accent);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .sobre-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 1.4rem;
+    }
+    .sobre-text h3 em { font-style: italic; color: var(--accent); }
+    .sobre-text p { color: var(--muted); margin-bottom: 1.2rem; }
+    .sobre-stats {
+      display: flex; gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    /* ── PROJETOS ── */
+    #projetos { background: var(--ink); color: var(--bg); }
+    #projetos .section-title { color: var(--bg); }
+    #projetos .section-num { color: var(--accent); }
+    #projetos .section-line { background: rgba(255,255,255,.1); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+    }
+    .project-card {
+      background: #222018;
+      padding: 2.4rem;
+      border: 1px solid rgba(255,255,255,.06);
+      transition: background .25s, transform .25s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .project-card:hover { background: #2a271e; transform: translateY(-3px); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-tag {
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: #F0EDE8;
+      margin-bottom: .9rem;
+    }
+    .project-desc {
+      font-size: .85rem;
+      color: rgba(240,237,232,.45);
+      line-height: 1.65;
+      margin-bottom: 1.8rem;
+    }
+    .project-link {
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem;
+      border-bottom: 1px solid rgba(200,169,110,.3);
+      padding-bottom: 2px;
+      transition: border-color .2s;
+    }
+    .project-link:hover { border-color: var(--accent); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--card); }
+    .skills-layout {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 5rem;
+    }
+    .skills-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+    .skills-intro em { font-style: italic; color: var(--accent); }
+    .skills-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 3rem;
+      align-content: start;
+    }
+    .skill-group-title {
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .skill-item {
+      display: flex; flex-direction: column; gap: .5rem;
+      margin-bottom: .9rem;
+    }
+    .skill-name {
+      font-size: .88rem;
+      color: var(--ink);
+      display: flex; justify-content: space-between;
+    }
+    .skill-name span { color: var(--muted); font-size: .78rem; }
+    .skill-bar {
+      height: 2px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-fill {
+      position: absolute; top: 0; left: 0; height: 100%;
+      background: var(--ink);
+      transform-origin: left;
+      animation: barGrow 1.2s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes barGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    /* ── CONTATO ── */
+    #contato { background: var(--bg); }
+    .contato-wrap {
+      max-width: 660px;
+    }
+    .contato-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+    .contato-lead em { font-style: italic; color: var(--accent); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.2rem; }
+    .form-group label {
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: .7rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      font-weight: 300;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 100px; }
+    .form-submit {
+      margin-top: .8rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .contato-socials {
+      display: flex; gap: 1.4rem;
+    }
+    .social-link {
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .social-link:hover { color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer p { font-size: .75rem; color: var(--muted); letter-spacing: .06em; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity:0; transform:translateY(-14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.8rem; }
+      .nav-links { gap: 1.4rem; }
+      section { padding: 5rem 1.8rem; }
+      #hero { padding: 0 1.8rem 4rem; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .sobre-img-wrap { max-width: 320px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 1px; }
+      .skills-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">[Seu Nome]</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-text" aria-hidden="true">Words</div>
+    <p class="hero-tag">Especialista em Marketing &amp; Conteúdo</p>
+    <h1 class="hero-name">
+      [Seu <em>Nome</em>]<br/>Aqui
+    </h1>
+    <p class="hero-sub">Estrategista de conteúdo com foco em narrativas que conectam marcas e pessoas. Transformo dados em histórias e histórias em resultados.</p>
+    <div class="hero-cta">
+      <a href="#projetos" class="btn-primary">Ver projetos</a>
+      <a href="#contato" class="btn-ghost">Falar comigo</a>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Sobre mim</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="sobre-grid">
+      <div class="sobre-img-wrap reveal">
+        <div class="sobre-img-placeholder" id="photoBox" title="Clique para adicionar sua foto">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+          </svg>
+          <span>Clique para adicionar sua foto</span>
+          <input type="file" accept="image/*" onchange="previewPhoto(this)" />
+        </div>
+        <div class="sobre-accent-line"></div>
+      </div>
+      <div class="sobre-text reveal">
+        <h3>Apaixonada por <em>contar histórias</em> que geram impacto</h3>
+        <p>Escreva aqui uma apresentação pessoal: sua trajetória, o que te motiva, sua abordagem de trabalho e os tipos de projetos que você mais gosta de desenvolver.</p>
+        <p>Fale sobre sua experiência, os mercados em que atuou e o diferencial que você traz para cada projeto. Seja autêntico(a) — essa é a seção que as pessoas mais lembram.</p>
+        <div class="sobre-stats">
+          <div class="stat-item">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Anos de experiência</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">40+</div>
+            <div class="stat-label">Projetos entregues</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Clientes atendidos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projetos</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <p class="project-tag">Estratégia de Conteúdo</p>
+        <h3 class="project-title">Nome do Projeto 01</h3>
+        <p class="project-desc">Descreva brevemente o projeto, o desafio enfrentado, sua solução e os resultados alcançados. Ex: aumento de 200% no engajamento em 3 meses.</p>
+        <a href="#" class="project-link">Ver projeto →</a>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.1s">
+        <p class="project-tag">Copywriting</p>
+        <h3 class="project-title">Nome do Projeto 02</h3>
+        <p class="project-desc">Descreva brevemente o projeto, o desafio enfrentado, sua solução e os resultados alcançados. Ex: campanha que gerou R$500k em conversões.</p>
+        <a href="#" class="project-link">Ver projeto →</a>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.2s">
+        <p class="project-tag">Social Media</p>
+        <h3 class="project-title">Nome do Projeto 03</h3>
+        <p class="project-desc">Descreva brevemente o projeto, o desafio enfrentado, sua solução e os resultados alcançados. Ex: crescimento de 0 a 50k seguidores em 6 meses.</p>
+        <a href="#" class="project-link">Ver projeto →</a>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.05s">
+        <p class="project-tag">SEO &amp; Blog</p>
+        <h3 class="project-title">Nome do Projeto 04</h3>
+        <p class="project-desc">Descreva brevemente o projeto, o desafio enfrentado, sua solução e os resultados alcançados. Ex: 300% de aumento no tráfego orgânico.</p>
+        <a href="#" class="project-link">Ver projeto →</a>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.15s">
+        <p class="project-tag">Email Marketing</p>
+        <h3 class="project-title">Nome do Projeto 05</h3>
+        <p class="project-desc">Descreva brevemente o projeto, o desafio enfrentado, sua solução e os resultados alcançados. Ex: taxa de abertura de 45% acima da média do setor.</p>
+        <a href="#" class="project-link">Ver projeto →</a>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.25s">
+        <p class="project-tag">Branding Editorial</p>
+        <h3 class="project-title">Nome do Projeto 06</h3>
+        <p class="project-desc">Descreva brevemente o projeto, o desafio enfrentado, sua solução e os resultados alcançados. Ex: criação do tom de voz de uma marca do zero.</p>
+        <a href="#" class="project-link">Ver projeto →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Habilidades</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-layout">
+      <div class="reveal">
+        <p class="skills-intro">Ferramentas e competências que uso para criar conteúdo que <em>converte e conecta.</em></p>
+      </div>
+      <div class="skills-cols reveal">
+        <div>
+          <p class="skill-group-title">Conteúdo</p>
+          <div class="skill-item">
+            <div class="skill-name">Copywriting <span>Avançado</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">SEO &amp; Conteúdo <span>Avançado</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">Social Media <span>Avançado</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">Email Marketing <span>Intermediário</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-title">Ferramentas</p>
+          <div class="skill-item">
+            <div class="skill-name">RD Station <span>Avançado</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">Google Analytics <span>Intermediário</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">Canva / Figma <span>Intermediário</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">WordPress <span>Avançado</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:84%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Contato</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contato-wrap reveal">
+      <h3 class="contato-lead">Vamos criar algo <em>incrível</em> juntos?</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Seu nome</label>
+          <input type="text" placeholder="João Silva"/>
+        </div>
+        <div class="form-group">
+          <label>Seu email</label>
+          <input type="email" placeholder="joao@email.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Assunto</label>
+        <input type="text" placeholder="Sobre qual projeto você quer conversar?"/>
+      </div>
+      <div class="form-group">
+        <label>Mensagem</label>
+        <textarea placeholder="Conte um pouco sobre seu projeto, prazo e orçamento…"></textarea>
+      </div>
+      <div class="form-submit">
+        <button class="btn-primary" type="button">Enviar mensagem</button>
+        <div class="contato-socials">
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">Behance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 [Seu Nome]. Todos os direitos reservados.</p>
+    <p>Feito com cuidado e muito café ☕</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Photo preview
+    function previewPhoto(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const box = document.getElementById('photoBox');
+        // remove svg and span
+        [...box.querySelectorAll('svg, span')].forEach(el => el.remove());
+        // add or replace img
+        let img = box.querySelector('img');
+        if (!img) { img = document.createElement('img'); box.appendChild(img); }
+        img.src = e.target.result;
+        img.alt = 'Minha foto';
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
